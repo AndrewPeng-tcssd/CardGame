@@ -53,14 +53,14 @@ def battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, wcf):
         if (c1_atk - c2_defed) <= 0:
             return c2_hp, c2_hp, c1_defed
         else:
-            return (c2_hp - (c1_atk - c2_defed)), c2_hp, c2_defed
+            return (c2_hp - c1_atk + c2_defed), c2_hp, c2_defed
 
     elif wcf == 2:
         c1_defed = random.randint(1, c1_def)
         if (c2_atk - c1_def) <= 0:
             return c1_hp, c1_hp, c1_defed
         else:
-            return (c1_hp - (c2_atk - c1_defed)), c1_hp, c1_defed
+            return (c1_hp - c2_atk + c1_defed), c1_hp, c1_defed
     
 
     
@@ -138,6 +138,7 @@ while True:
                 print("Rolling...")
                 if m1_1_r1 == 1:
                     print("Player 1 goes first!")
+                    going = 1
                     while True:
                         print(f"Player 1 has: {', '.join(p1_cards)}")
                         print(f"Player 2 has: {', '.join(p2_cards)}") 
@@ -156,21 +157,24 @@ while True:
                                     c2_hp = c2_stats[1]
                                     c2_atk = c2_stats[2]
                                     c2_def = c2_stats[3]
-                                m1_1_r2 = random.randint(1,2)
-                                if m1_1_r2 == 1:
+                                if going == 1:
                                     c2_hpn, c2_hp, c2_defed = battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, 1)
                                     print(f"Player 1's {m1_1_r1_p1_c1} goes first! It does {(c2_hp - c2_hpn) + c2_defed} damage {m1_1_r1_p2_c1} blocks {c2_defed} damage! {m1_1_r1_p2_c1} now has {c2_hpn} HP!")
-                                    if c2_hpn <= 0:
+                                    c2_hp = c2_hpn
+                                    if c2_hp <= 0:
+                                        c1_w = True
                                         break
                                     else:
-                                        pass
-                                elif m1_1_r2 == 2:
+                                        going = 2
+                                elif going == 2:
                                     c1_hpn, c1_hp, c1_defed = battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, 2)
-                                    print(f"Player 2's {m1_1_r1_p2_c1} goes first! It does {(c1_hp - c1_hpn) + c1_defed} damage {m1_1_r1_p1_c1} blocks {c1_defed} damage! {m1_1_r1_p1_c1} now has {c1_hpn} HP!")
-                                    if c1_hpn <= 0:
+                                    print(f"Player 2's {m1_1_r1_p2_c1} goes first! It does {(c1_hp - c1_hpn) + c1_defed} damage {m1_1_r1_p1_c1} blocks {c1_defed} damage! {m1_1_r1_p1_c1} now has {c1_hpn} HP!") 
+                                    c1_hp = c1_hpn
+                                    if c1_hp <= 0:
+                                        c2_w = True
                                         break
                                     else:
-                                        pass
+                                        going = 1
                                 time.sleep(1)
                             else:
                                 print("Invalid card. Try again. ()") 
@@ -178,6 +182,7 @@ while True:
                             print("Invalid card. Try again.")
                 elif m1_1_r1 == 2:
                     print("Player 2 goes first!")
+                    going = 1
                     while True:
                         p1_w = False
                         p2_w = False
@@ -198,19 +203,24 @@ while True:
                                     c2_hp = c2_stats[1]
                                     c2_atk = c2_stats[2]
                                     c2_def = c2_stats[3]
-                                m1_1_r2 = random.randint(1,2)
-                                if m1_1_r2 == 1:
+                                if going == 1:
                                     c2_hpn, c2_hp, c2_defed = battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, 1)
                                     print(f"Player 1's {m1_1_r2_p1_c1} goes first! It does {(c2_hp - c2_hpn) + c2_defed} damage {m1_1_r2_p2_c1} blocks {c2_defed} damage! {m1_1_r2_p2_c1} now has {c2_hpn} HP!")
+                                    c2_hp = c2_hpn
                                     if c2_hpn <= 0:
                                         c1_w = True
                                         break
-                                elif m1_1_r2 == 2:
+                                    else:
+                                        going = 1
+                                elif going == 2:
                                     c1_hpn, c1_hp, c1_defed = battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, 2)
                                     print(f"Player 2's {m1_1_r2_p2_c1} goes first! It does {(c1_hp - c1_hpn) + c1_defed} damage {m1_1_r2_p1_c1} blocks {c1_defed} damage! {m1_1_r2_p1_c1} now has {c1_hpn} HP!")
+                                    c1_hp = c1_hpn
                                     if c1_hpn <= 0:
                                         c2_w = True
                                         break
+                                    else:
+                                        going = 1
                                 time.sleep(1)
                             else:
                                 print("Invalid card. Try again.") 
