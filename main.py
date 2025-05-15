@@ -1,7 +1,6 @@
 import os
 import time
 import random
-from getpass import getpass
 
 
 done_intro = False
@@ -142,9 +141,9 @@ while True:
                     while True:
                         print(f"Player 1 has: {', '.join(p1_cards)}")
                         print(f"Player 2 has: {', '.join(p2_cards)}") 
-                        m1_1_r1_p1_c1 = getpass("Player 1 card: ")
+                        m1_1_r1_p1_c1 = input("Player 1 card: ")
                         if m1_1_r1_p1_c1 in p1_cards:
-                            m1_1_r1_p2_c1 = getpass("Player 2 card: ")
+                            m1_1_r1_p2_c1 = input("Player 2 card: ")
                             if m1_1_r1_p2_c1 in p2_cards:
                                 print(f"Player 1 chose {m1_1_r1_p1_c1}! Player 2 chose {m1_1_r1_p2_c1}!")
                                 if m1_1_r1_p1_c1 in computer_card:
@@ -188,9 +187,9 @@ while True:
                         p2_w = False
                         print(f"Player 1 has: {', '.join(p1_cards)}")
                         print(f"Player 2 has: {', '.join(p2_cards)}") 
-                        m1_1_r2_p2_c1 = getpass("Player 2 card: ")
+                        m1_1_r2_p2_c1 = input("Player 2 card: ")
                         if m1_1_r2_p2_c1 in p2_cards:
-                            m1_1_r2_p1_c1 = getpass("Player 1 card: ")
+                            m1_1_r2_p1_c1 = input("Player 1 card: ")
                             if m1_1_r2_p1_c1 in p1_cards:
                                 print(f"Player 1 chose {m1_1_r2_p1_c1}! Player 2 chose {m1_1_r2_p2_c1}!")
                                 if m1_1_r2_p1_c1 in computer_card:
@@ -297,4 +296,4 @@ while True:
             if m3 == "1":
                 m3_1 = input(f"Which pack are you going to choose from? Packs: {', '.join(pack_names)} ")
             elif m3 == "2":
-                m3_1 = input(f"Which pack are you going to choose from? Packs: {', '.join(pack_names)} ")
+                m3_2 = input(f"Which pack are you going to choose from? Packs: {', '.join(pack_names)} ")
