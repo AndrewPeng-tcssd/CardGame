@@ -11,7 +11,7 @@ p1_coins = 0
 p2_coins = 0
 give_start = 4
 
-# key is the name of the card value is an array and first argument is the description, second is health, third is damage, fourth is defense, and fifth is rarity
+#  first argument is the description, second is health, third is damage, fourth is defense, and fifth is rarity
 
 
 computer_card = ["Keyboard", "Mouse", "Monitor", "FireFox", "CPU", "GPU", "Google", "Gaming PC", "Supercomputer", "Quantum Computer"]
@@ -62,7 +62,39 @@ def battle(c1_hp, c1_atk, c1_def, c2_hp, c2_atk, c2_def, wcf):
             return (c1_hp - c2_atk + c1_defed), c1_hp, c1_defed
     
 
-    
+def roll_start():
+    for i in range(give_start): 
+        which_pack = random.choice(all_packs)
+        random_num = random.randint(1, 100)
+        if 1 <= random_num <= 60:
+            random_num_common = random.randint(0, 3)
+            whichcard = random_num_common
+        elif 61 <= random_num <= 90:
+            random_num_uncommon = random.randint(4, 7)
+            whichcard = random_num_uncommon
+        elif 91 <= random_num <= 99:
+            random_num_epic = random.randint(8, 9)
+            whichcard = random_num_epic
+        elif random_num == 100:
+            whichcard = 9
+        p1_cards.append(which_pack[whichcard])
+
+
+    for i in range(give_start):
+        which_pack = random.choice(all_packs)
+        random_num = random.randint(1, 100)
+        if 1 <= random_num <= 60:
+            random_num_common = random.randint(0, 3)
+            whichcard = random_num_common
+        elif 61 <= random_num <= 90:
+            random_num_uncommon = random.randint(4, 7)
+            whichcard = random_num_uncommon
+        elif 91 <= random_num <= 99:
+            random_num_epic = random.randint(8, 9)
+            whichcard = random_num_epic
+        elif random_num == 100:
+            whichcard = 9
+        p2_cards.append(which_pack[whichcard])
 
 while True:
     if done_intro == False:
@@ -73,39 +105,7 @@ while True:
             if intro_2 == "c":
                 sleep(0.3)
                 intro_3 = input("Player 1 and Player 2, you will both receive 4 random cards. Press 'c' to continue. ")
-                for i in range(give_start): 
-                    which_pack = random.choice(all_packs)
-                    random_num = random.randint(1, 100)
-                    if 1 <= random_num <= 60:
-                        random_num_common = random.randint(0, 3)
-                        whichcard = random_num_common
-                    elif 61 <= random_num <= 90:
-                        random_num_uncommon = random.randint(4, 7)
-                        whichcard = random_num_uncommon
-                    elif 91 <= random_num <= 99:
-                        random_num_epic = random.randint(8, 9)
-                        whichcard = random_num_epic
-                    elif random_num == 100:
-                        whichcard = 9
-                    p1_cards.append(which_pack[whichcard])
-
-
-                for i in range(give_start):
-                    which_pack = random.choice(all_packs)
-                    random_num = random.randint(1, 100)
-                    if 1 <= random_num <= 60:
-                        random_num_common = random.randint(0, 3)
-                        whichcard = random_num_common
-                    elif 61 <= random_num <= 90:
-                        random_num_uncommon = random.randint(4, 7)
-                        whichcard = random_num_uncommon
-                    elif 91 <= random_num <= 99:
-                        random_num_epic = random.randint(8, 9)
-                        whichcard = random_num_epic
-                    elif random_num == 100:
-                        whichcard = 9
-                    p2_cards.append(which_pack[whichcard])
-
+                roll_start()
                 if intro_3 == "c":
                     sleep(1)
                     print(f"Player 1 received: {', '.join(p1_cards)}")
@@ -326,3 +326,7 @@ while True:
                         print("Invalid player.")
                         sleep(0.5)
                         break
+        else:
+            print("Invalid option.")
+            sleep(0.5)
+            pass
