@@ -286,7 +286,6 @@ while True:
                     else:
                         print("Invalid player.")
                         sleep(0.5)
-                        break
         else:
             print("Invalid option.")
             sleep(0.5)
